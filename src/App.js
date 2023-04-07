@@ -7,31 +7,27 @@ class App extends Component {
   super();
     
   this.state = {
-    monsters:[
-      {
-        name:'Covenant',
-        id:'12wkxk2'
-      },
-      
-      {
-        name:'Blessed',
-        id:'12wkasd2'
-      },
-      
-     {
-      name:'praise',
-      id:'12wfsg'
-      },
-     {
-      name:'peculia',
-      id:'12wkwer2'
-      },
-    ]
+    monsters:[],
     
-      
-      }; 
+  }; 
 
     }
+     
+    componentDidMount(){
+      //* the fetch returns a promise in which we then convert its response to json which a returns a promise and we then take the users and setState and pass a call back
+      fetch('https://jsonplaceholder.typicode.com/users')
+      .then((response)=> response.json())
+      .then((users)=> this.setState(()=>{
+        return {monsters: users}
+      }, ()=> {
+        console.log(this.state);
+      }
+      
+      ))
+      ;
+    }
+
+
 
   render (){ 
     return <div className="App"> 
@@ -43,8 +39,7 @@ class App extends Component {
         <div key = {monster.id}>
           <h1>{monster.name}</h1>
         </div>
-        
-        
+
       )
     })
 
