@@ -10,14 +10,21 @@ class App extends Component {
     monsters:[
       {
         name:'Covenant',
+        id:'12wkxk2'
       },
       
       {
         name:'Blessed',
+        id:'12wkasd2'
       },
       
      {
       name:'praise',
+      id:'12wfsg'
+      },
+     {
+      name:'peculia',
+      id:'12wkwer2'
       },
     ]
     
@@ -31,7 +38,14 @@ class App extends Component {
    {
     //this maps through the monster of the this.state obj and returns each monster's name
      this.state.monsters.map((monster)=>{
-      return <h1>{monster.name}</h1>
+      return (
+        //" Warning: Each child in a list should have a unique "key" prop."- useful for react
+        <div key = {monster.id}>
+          <h1>{monster.name}</h1>
+        </div>
+        
+        
+      )
     })
 
    }
