@@ -7,24 +7,35 @@ class App extends Component {
   super();
     
   this.state = {
+    monsters:[
+      {
+        name:'Covenant',
+      },
+      
+      {
+        name:'Blessed',
+      },
+      
+     {
+      name:'praise',
+      },
+    ]
     
-      monster1: {name:'Covenant',
-      },
       
-      monster2: {name:'Blessed',
-      },
-      
-      monster3: {name:'praise',
-      },
       }; 
 
     }
 
   render (){ 
     return <div className="App"> 
-      <h1>{this.state.monster1.name}</h1>
-      <h1>{this.state.monster2.name}</h1>
-      <h1>{this.state.monster3.name}</h1>
+   {
+    //this maps through the monster of the this.state obj and returns each monster's name
+     this.state.monsters.map((monster)=>{
+      return <h1>{monster.name}</h1>
+    })
+
+   }
+    
       
   </div>
   }
