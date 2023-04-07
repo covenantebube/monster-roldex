@@ -12,8 +12,9 @@ class App extends Component {
   }; 
 
     }
-     
+     //!use the componentDidMount LifeCycle when ever we  need to fetch data from an API 
     componentDidMount(){
+      
       //* the fetch returns a promise in which we then convert its response to json which a returns a promise and we then take the users and setState and pass a call back
       fetch('https://jsonplaceholder.typicode.com/users')
       .then((response)=> response.json())
