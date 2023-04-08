@@ -31,30 +31,27 @@ class App extends Component {
       ;
     }
 
-// *we a
+    onSearchChange = (event)=>{
+      console.log(event.target.value);
+      const searchField = event.target.value.toLocaleLowerCase();
+
+      this.setState(()=>{
+        return {searchField}
+      })
+      
+      }
+
+
 
   render (){ 
 
  console.log( "render")
-// *this take
     const filteredMonsters =this.state.monsters.filter((monster)=>{
       return  monster.name.toLocaleLowerCase().includes(this.state.searchField);
     });
    
     return <div className="App"> 
-    <input className='search-box' type='search' placeholder='search monster' onChange={(event)=>{
-      console.log(event.target.value);
-      //*serch field  an '' at this.state and now has been given a value which is every typed event in the input field
-      //*event.target.value == is every typed event in the input field
-      const searchField = event.target.value.toLocaleLowerCase();
-
-     
-      this.setState(()=>{
-        return {searchField}
-      })
-      
-      }} ></input>
-      {/* this is just to display each filtered monter's name  */ }
+    <input className='search-box' type='search' placeholder='search monster' onChange={this.onSearchChange} ></input>
    { filteredMonsters.map((monster)=>{
       return (
         <div key = {monster.id}>
