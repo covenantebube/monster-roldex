@@ -10,12 +10,14 @@ class App extends Component {
     monsters:[],
     
   }; 
-
+  console.log("constuctor")
+    
     }
-     //!use the componentDidMount LifeCycle when ever we  need to fetch data from an API 
+    
     componentDidMount(){
       
-      //* the fetch returns a promise in which we then convert its response to json which a returns a promise and we then take the users and setState and pass a call back
+      console.log("componentDidMount")
+
       fetch('https://jsonplaceholder.typicode.com/users')
       .then((response)=> response.json())
       .then((users)=> this.setState(()=>{
@@ -29,14 +31,26 @@ class App extends Component {
     }
 
 
-
+// event.target.value == is every typed event in the input field
   render (){ 
+    console.log( "render")
     return <div className="App"> 
-   {
-    //this maps through the monster of the this.state obj and returns each monster's name
-     this.state.monsters.map((monster)=>{
+    <input className='search-box' type='search' placeholder='search monster' onChange={(event)=>{
+      console.log(event.target.value);
+      const searchString = event.target.value.toLocaleLowerCase();
+
+      //this.state.monsters === [{name: 'leanna'},{name: 'Yihua'}...]
+      const filteredMonsters =this.state.monsters.filter((monster)=>{
+        return  monster.name.toLocaleLowerCase().includes(searchString);
+      });
+      this.setState(()=>{
+        return { monsters: filteredMonsters}
+      })
+      
+      }} ></input>
+   { this.state.
+   monsters.map((monster)=>{
       return (
-        //" Warning: Each child in a list should have a unique "key" prop."- useful for react
         <div key = {monster.id}>
           <h1>{monster.name}</h1>
         </div>
