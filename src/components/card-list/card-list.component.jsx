@@ -3,7 +3,7 @@ import { Component } from "react";
 
 class CardList extends Component {
         render(){
-            console.log('render from app')
+          
             const {monsters} = this.props;
                 return (
                 <div>
