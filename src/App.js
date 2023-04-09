@@ -8,13 +8,25 @@ import './App.css';
 const App = () => {
 
   const [searchField, setSearchField] = useState('')//[value, setValue]
-  const [monsters, setMonsters] = useState([])
+  const [monsters, setMonsters] = useState([]);
+ // const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   console.log('render');
   //adding fetch calls like this will trigger infinite rerender calss
+  //we can resolve that using the useEffect hook
+  //use effect hook takes two arguments {}=>a callback fxn, []=an array of dependecies (useEffect(()=>{},[]);)
+  //a callback fxn= the code we want to happen inside our fxn
+  //[]== sates of dependences, state or props values, what it is saying is when any of the dependencies inside of this array changes is when i will run this call back function
+  //the fetch call is a side effect
+  //passing an empty array means nothing is going to change in the call back fxn as it will only run once when it is mount
 
-      fetch('https://jsonplaceholder.typicode.com/users')
+  useEffect(()=>{
+    console.log('effect fired')
+    fetch('https://jsonplaceholder.typicode.com/users')
       .then((response)=> response.json())
       .then((users)=> setMonsters(users));
+  },[]);
+
+      
 
 
   const onSearchChange = (event)=>{
@@ -22,7 +34,7 @@ const App = () => {
 
       setSearchField(searchFieldString);
   };
-
+//this is called every time we type and it cost alot so..
     const filteredMonsters = monsters.filter((monster)=>{
       return  monster.name.toLocaleLowerCase().includes( searchField);
     });
