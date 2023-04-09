@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CardList from './components/card-list/card-list.component';
 import SearchBox from './components/search-box/search-box.component';
 import logo from './logo.svg';
@@ -8,13 +8,25 @@ import './App.css';
 const App = () => {
 
   const [searchField, setSearchField] = useState('')//[value, setValue]
-  console.log({searchField});
+  const [monsters, setMonsters] = useState([])
+  console.log('render');
+  //adding fetch calls like this will trigger infinite rerender calss
+
+      fetch('https://jsonplaceholder.typicode.com/users')
+      .then((response)=> response.json())
+      .then((users)=> setMonsters(users));
+
 
   const onSearchChange = (event)=>{
       const searchFieldString = event.target.value.toLocaleLowerCase();
 
       setSearchField(searchFieldString);
   };
+
+    const filteredMonsters = monsters.filter((monster)=>{
+      return  monster.name.toLocaleLowerCase().includes( searchField);
+    });
+
 
   return(
     <div className="App"> 
@@ -24,7 +36,7 @@ const App = () => {
        onChangeHandler = {onSearchChange}
        placeholder = 'search monsters'
           />
-      {/* <CardList monsters ={filteredMonsters} /> */}
+      <CardList monsters ={filteredMonsters} />
   </div>
 
   )
@@ -66,9 +78,7 @@ const App = () => {
 //     const {onSearchChange} = this;
 
 
-//     const filteredMonsters = monsters.filter((monster)=>{
-//       return  monster.name.toLocaleLowerCase().includes( searchField);
-//     });
+
    
 //     return (
     
