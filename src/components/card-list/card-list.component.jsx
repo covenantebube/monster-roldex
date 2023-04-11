@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+
 
 import Card from "../card/card.component";
 import './card-list.styles.css'
